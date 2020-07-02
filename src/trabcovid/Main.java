@@ -7,7 +7,7 @@ package trabcovid;
 
 /**
  *
- * @author Maicon Esperafico
+ * @author Maicon Esperafico, Matheus Oliveira
  */
 public class Main {
 

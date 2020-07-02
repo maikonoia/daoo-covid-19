@@ -5,9 +5,15 @@
  */
 package trabcovid;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Maicon Esperafico
+ * @author Maicon Esperafico, Matheus Oliveira
  */
 public class TestCovid19 extends javax.swing.JFrame {
 
@@ -322,8 +328,33 @@ public class TestCovid19 extends javax.swing.JFrame {
         }
 
         probability.setText(String.valueOf(String.format("%.0f%%", sumanswers)));
+        
+        new GenerateFile().run();
     }//GEN-LAST:event_btnResultActionPerformed
 
+    private class GenerateFile extends Thread {
+
+    	public void run() {
+    		try {
+    			FileWriter file = new FileWriter("Resultado.txt");
+    			file.write("Taxa de probabilidade: " + probability.getText());
+    			file.write("\n");
+    			file.write("Informações: " + message.getText());
+    			file.write("\n");
+    			file.write(commentBox.getText());
+    			file.close();
+    			JOptionPane.showMessageDialog(null, "Arquivo resultado.txt criado!", "resultado.txt", 3);
+                        
+                        Desktop desktop = Desktop.getDesktop();
+                        
+                        File fileOpen = new File("Resultado.txt");
+                        desktop.open(fileOpen);
+    		
+                } catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    	}
+    }
     
     /**
      * @param args the command line arguments
